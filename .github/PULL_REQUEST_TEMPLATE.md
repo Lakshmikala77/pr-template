@@ -20,13 +20,13 @@ Please select the environment for this pull request by placing an `x` in the app
 <summary>Dev</summary>
 
 - **AP Region:**
-  - Image: [Enter image value here]
+  - AP_Image: [                     ]
 
 - **EU Region:**
-  - Image: [Enter image value here]
+  - EU_Image: [                     ]
 
 - **US Region:**
-  - Image: [Enter image value here]
+  - US_Image: [                      ]
 
 </details>
 
@@ -37,13 +37,13 @@ Please select the environment for this pull request by placing an `x` in the app
 **Note: This section is not editable while raising PR for Dev environment.**
 
 - **AP Region:**
-  - Image: [ ]
+  - AP_Image: [                     ]
 
 - **EU Region:**
-  - Image: [ ]
+  - EU_Image: [                     ]
 
 - **US Region:**
-  - Image: [ ]
+  - US_Image: [                      ]
 
 </details>
 
@@ -54,13 +54,13 @@ Please select the environment for this pull request by placing an `x` in the app
 **Note: Do not edit this section if you are raising PR for Dev environment.**
 
 - **AP Region:**
-  - Image: [ ]
+  - AP_Image: [                     ]
 
 - **EU Region:**
-  - Image: [ ]
+  - EU_Image: [                     ]
 
 - **US Region:**
-  - Image: [ ]
+  - US_Image: [                     ]
 
 </details>
 
@@ -71,13 +71,13 @@ Please select the environment for this pull request by placing an `x` in the app
 **Note: Do not edit this section if you are raising PR for Dev environment.**
 
 - **AP Region:**
-  - Image: [ ]
+  - AP_Image: [                     ]
 
 - **EU Region:**
-  - Image: [ ]
+  - EU_Image: [                     ]
 
 - **US Region:**
-  - Image: [ ]
+  - US_Image: [                     ]
 
 </details>
 
@@ -88,14 +88,13 @@ Please select the environment for this pull request by placing an `x` in the app
 **Note: Do not edit this section if you are raising PR for Dev environment.**
 
 - **AP Region:**
-  - Image: [ ]
+  - AP_Image: [                     ]
 
 - **EU Region:**
-  - Image: [ ]
+  - EU_Image: [                     ]
 
 - **US Region:**
-  - Image: [ ]
-
+  - US_Image: [                     ]
 </details>
 
 ### Staging_Production Environment
@@ -105,12 +104,12 @@ Please select the environment for this pull request by placing an `x` in the app
 **Note: This section is not editable while raising PR for Dev environment.**
 
 - **AP Region:**
-  - Image: [ ]
+  - AP_Image: [                     ]
 
 - **EU Region:**
-  - Image: [ ]
+  - EU_Image: [                     ]
 
 - **US Region:**
-  - Image: [ ]
+  - US_Image: [                     ]
 
 </details>
