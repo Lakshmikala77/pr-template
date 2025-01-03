@@ -2,7 +2,7 @@
 
 Please select the environment for this pull request by placing an `x` in the appropriate box:
 
-- [x] Dev
+- [ ] Dev
 - [ ] Staging
 - [ ] Preprod
 - [ ] Prod
@@ -20,13 +20,13 @@ Please select the environment for this pull request by placing an `x` in the app
 <summary>Dev</summary>
 
 - **AP Region:**
-  - Image:dev-ap-image
+  - Image:
 
 - **EU Region:**
-  - Image:dev-eu-image
+  - Image:
 
 - **US Region:**
-  - Image:dev-us-image
+  - Image:
 
 </details>
 
