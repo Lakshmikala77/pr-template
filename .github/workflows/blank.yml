@@ -22,7 +22,7 @@ jobs:
         # Extract the selected environment
         ENVIRONMENT=$(echo "$PR_BODY" | grep -oP '(?<=\[x\] ).*')
         echo "Selected Environment: $ENVIRONMENT"  # Debugging: Print the selected environment
-        
+
         # Initialize variables
         AP_IMAGE=""
         EU_IMAGE=""
@@ -55,6 +55,12 @@ jobs:
         echo "AP Image: '$AP_IMAGE'"  # Debugging: Print the extracted AP image value
         echo "EU Image: '$EU_IMAGE'"  # Debugging: Print the extracted EU image value
         echo "US Image: '$US_IMAGE'"  # Debugging: Print the extracted US image value
+        
+        # Check if environment and image values were extracted correctly
+        if [ -z "$ENVIRONMENT" ] || [ -z "$AP_IMAGE" ] || [ -z "$EU_IMAGE" ] || [ -z "$US_IMAGE" ]; then
+          echo "Error: One or more values are empty."
+          exit 1
+        fi
 
         # Set the output variables for the deployment steps using Environment Files
         echo "environment=$ENVIRONMENT" >> $GITHUB_ENV
