@@ -42,6 +42,23 @@ Please select the environment for this pull request by placing an `x` in the app
 
 </details>
 
+### Staging_Production Environment
+<details>
+<summary>Staging_Production</summary>
+
+**Note: This section is not editable while raising PR for Dev environment.**
+
+- **AP Region:**
+  - Image: [ ]
+
+- **EU Region:**
+  - Image: [ ]
+
+- **US Region:**
+  - Image: [ ]
+
+</details>
+
 ### Preprod Environment
 <details>
 <summary>Preprod</summary>
@@ -76,19 +93,3 @@ Please select the environment for this pull request by placing an `x` in the app
 
 </details>
 
-### Staging_Production Environment
-<details>
-<summary>Staging_Production</summary>
-
-**Note: This section is not editable while raising PR for Dev environment.**
-
-- **AP Region:**
-  - Image: [ ]
-
-- **EU Region:**
-  - Image: [ ]
-
-- **US Region:**
-  - Image: [ ]
-
-</details>
