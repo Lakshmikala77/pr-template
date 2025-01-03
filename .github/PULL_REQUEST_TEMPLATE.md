@@ -8,6 +8,11 @@ Please select the environment for this pull request by placing an `x` in the app
 - [ ] Prod
 - [ ] Staging_Production
 
+## Instructions
+- Only fill out the fields for the selected environment.
+- Leave the other sections empty or as-is.
+- Any entries in non-selected environments will be disregarded.
+
 ## Regions and Image Values
 
 ### Dev Environment
@@ -29,7 +34,7 @@ Please select the environment for this pull request by placing an `x` in the app
 <details>
 <summary>Staging</summary>
 
-**Note: This section is not editable while raising PR for Dev environment.**
+**Note: Do not edit this section if you are raising PR for Dev environment.**
 
 - **AP Region:**
   - Image: [ ]
@@ -46,7 +51,7 @@ Please select the environment for this pull request by placing an `x` in the app
 <details>
 <summary>Preprod</summary>
 
-**Note: This section is not editable while raising PR for Dev environment.**
+**Note: Do not edit this section if you are raising PR for Dev environment.**
 
 - **AP Region:**
   - Image: [ ]
@@ -63,7 +68,7 @@ Please select the environment for this pull request by placing an `x` in the app
 <details>
 <summary>Prod</summary>
 
-**Note: This section is not editable while raising PR for Dev environment.**
+**Note: Do not edit this section if you are raising PR for Dev environment.**
 
 - **AP Region:**
   - Image: [ ]
@@ -80,7 +85,7 @@ Please select the environment for this pull request by placing an `x` in the app
 <details>
 <summary>Staging_Production</summary>
 
-**Note: This section is not editable while raising PR for Dev environment.**
+**Note: Do not edit this section if you are raising PR for Dev environment.**
 
 - **AP Region:**
   - Image: [ ]
