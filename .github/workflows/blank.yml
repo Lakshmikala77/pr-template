@@ -16,24 +16,24 @@ jobs:
       id: extract
       run: |
         PR_BODY=$(jq -r '.pull_request.body' $GITHUB_EVENT_PATH)
+        echo "Pull Request Body: $PR_BODY"  # Debugging: Print the PR body
+
         ENVIRONMENT=$(echo "$PR_BODY" | grep -oP '(?<=\[x\] ).*')
+        echo "Selected Environment: $ENVIRONMENT"  # Debugging: Print the selected environment
         
         if [[ "$ENVIRONMENT" == "Dev" ]]; then
-          AP_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Dev Environment.*AP Region:.*Image:).*' | head -n 1)
-          EU_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Dev Environment.*EU Region:.*Image:).*' | head -n 1)
-          US_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Dev Environment.*US Region:.*Image:).*' | head -n 1)
+          AP_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Dev Environment.*AP Region:.*Image: ).*' | head -n 1)
+          EU_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Dev Environment.*EU Region:.*Image: ).*' | head -n 1)
+          US_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Dev Environment.*US Region:.*Image: ).*' | head -n 1)
+          echo "AP Image: $AP_IMAGE"  # Debugging: Print the extracted AP image value
+          echo "EU Image: $EU_IMAGE"  # Debugging: Print the extracted EU image value
+          echo "US Image: $US_IMAGE"  # Debugging: Print the extracted US image value
         fi
 
         echo "::set-output name=environment::$ENVIRONMENT"
         echo "::set-output name=ap_image::$AP_IMAGE"
         echo "::set-output name=eu_image::$EU_IMAGE"
         echo "::set-output name=us_image::$US_IMAGE"
-
-    - name: Deploy to Dev
-      if: steps.extract.outputs.environment == 'Dev'
-      run: |
-        echo "Deploying to Dev environment"
-        echo "AP Region Image: ${{ steps.extract.outputs.ap_image }}"
-        echo "EU Region Image: ${{ steps.extract.outputs.eu_image }}"
-        echo "US Region Image: ${{ steps.extract.outputs.us_image }}"
-        # Add your deployment script/commands here
+      
+      env:
+        GITHUB_EVENT_PATH: ${{ github.event_path }}
