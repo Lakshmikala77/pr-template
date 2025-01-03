@@ -27,28 +27,33 @@ jobs:
         AP_IMAGE=""
         EU_IMAGE=""
         US_IMAGE=""
-        
+
+        # Regex patterns for extracting image values
+        PATTERN_AP='(?<=### '"$ENVIRONMENT"' Environment[\s\S]*- \*\*AP Region:.*Image:\s)(.*)'
+        PATTERN_EU='(?<=### '"$ENVIRONMENT"' Environment[\s\S]*- \*\*EU Region:.*Image:\s)(.*)'
+        PATTERN_US='(?<=### '"$ENVIRONMENT"' Environment[\s\S]*- \*\*US Region:.*Image:\s)(.*)'
+
         # Extract image values based on the selected environment
         if [[ "$ENVIRONMENT" == "Dev" ]]; then
-          AP_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- AP Region:\s+- Image:\s).*' | head -n 1)
-          EU_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- EU Region:\s+- Image:\s).*' | head -n 1)
-          US_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- US Region:\s+- Image:\s).*' | head -n 1)
+          AP_IMAGE=$(echo "$PR_BODY" | grep -oP "$PATTERN_AP" | head -n 1)
+          EU_IMAGE=$(echo "$PR_BODY" | grep -oP "$PATTERN_EU" | head -n 1)
+          US_IMAGE=$(echo "$PR_BODY" | grep -oP "$PATTERN_US" | head -n 1)
         elif [[ "$ENVIRONMENT" == "Staging" ]]; then
-          AP_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- AP Region:\s+- Image:\s).*' | head -n 1)
-          EU_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- EU Region:\s+- Image:\s).*' | head -n 1)
-          US_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- US Region:\s+- Image:\s).*' | head -n 1)
+          AP_IMAGE=$(echo "$PR_BODY" | grep -oP "$PATTERN_AP" | head -n 1)
+          EU_IMAGE=$(echo "$PR_BODY" | grep -oP "$PATTERN_EU" | head -n 1)
+          US_IMAGE=$(echo "$PR_BODY" | grep -oP "$PATTERN_US" | head -n 1)
         elif [[ "$ENVIRONMENT" == "Preprod" ]]; then
-          AP_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- AP Region:\s+- Image:\s).*' | head -n 1)
-          EU_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- EU Region:\s+- Image:\s).*' | head -n 1)
-          US_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- US Region:\s+- Image:\s).*' | head -n 1)
+          AP_IMAGE=$(echo "$PR_BODY" | grep -oP "$PATTERN_AP" | head -n 1)
+          EU_IMAGE=$(echo "$PR_BODY" | grep -oP "$PATTERN_EU" | head -n 1)
+          US_IMAGE=$(echo "$PR_BODY" | grep -oP "$PATTERN_US" | head -n 1)
         elif [[ "$ENVIRONMENT" == "Prod" ]]; then
-          AP_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- AP Region:\s+- Image:\s).*' | head -n 1)
-          EU_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- EU Region:\s+- Image:\s).*' | head -n 1)
-          US_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- US Region:\s+- Image:\s).*' | head -n 1)
+          AP_IMAGE=$(echo "$PR_BODY" | grep -oP "$PATTERN_AP" | head -n 1)
+          EU_IMAGE=$(echo "$PR_BODY" | grep -oP "$PATTERN_EU" | head -n 1)
+          US_IMAGE=$(echo "$PR_BODY" | grep -oP "$PATTERN_US" | head -n 1)
         elif [[ "$ENVIRONMENT" == "Staging_Production" ]]; then
-          AP_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- AP Region:\s+- Image:\s).*' | head -n 1)
-          EU_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- EU Region:\s+- Image:\s).*' | head -n 1)
-          US_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- US Region:\s+- Image:\s).*' | head -n 1)
+          AP_IMAGE=$(echo "$PR_BODY" | grep -oP "$PATTERN_AP" | head -n 1)
+          EU_IMAGE=$(echo "$PR_BODY" | grep -oP "$PATTERN_EU" | head -n 1)
+          US_IMAGE=$(echo "$PR_BODY" | grep -oP "$PATTERN_US" | head -n 1)
         fi
 
         # Print extracted image values
