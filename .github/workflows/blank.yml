@@ -1,4 +1,4 @@
-name: Deploy to $ENVIRONMENT environment
+name: Deploy
 
 on:
   pull_request:
@@ -15,6 +15,7 @@ jobs:
     - name: Extract environment and image values
       id: extract
       run: |
+        # Extract the pull request body
         PR_BODY=$(jq -r '.pull_request.body' $GITHUB_EVENT_PATH)
         echo "Pull Request Body: $PR_BODY"  # Debugging: Print the PR body
 
