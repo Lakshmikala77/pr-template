@@ -2,7 +2,7 @@
 
 Please select the environment for this pull request by placing an `x` in the appropriate box:
 
-- [ ] Dev
+- [x] Dev
 - [ ] Staging
 - [ ] Preprod
 - [ ] Prod
@@ -20,13 +20,13 @@ Please select the environment for this pull request by placing an `x` in the app
 <summary>Dev</summary>
 
 - **AP Region:**
-  - AP_Image: [                     ]
+  - Image: dev-ap-image
 
 - **EU Region:**
-  - EU_Image: [                     ]
+  - Image: dev-eu-image
 
 - **US Region:**
-  - US_Image: [                      ]
+  - Image: dev-us-image
 
 </details>
 
@@ -34,33 +34,16 @@ Please select the environment for this pull request by placing an `x` in the app
 <details>
 <summary>Staging</summary>
 
-**Note: This section is not editable while raising PR for Dev environment.**
-
-- **AP Region:**
-  - AP_Image: [                     ]
-
-- **EU Region:**
-  - EU_Image: [                     ]
-
-- **US Region:**
-  - US_Image: [                      ]
-
-</details>
-
-### Staging_Production Environment
-<details>
-<summary>Staging_Production</summary>
-
 **Note: Do not edit this section if you are raising PR for Dev environment.**
 
 - **AP Region:**
-  - AP_Image: [                     ]
+  - Image: 
 
 - **EU Region:**
-  - EU_Image: [                     ]
+  - Image: 
 
 - **US Region:**
-  - US_Image: [                     ]
+  - Image: 
 
 </details>
 
@@ -71,13 +54,13 @@ Please select the environment for this pull request by placing an `x` in the app
 **Note: Do not edit this section if you are raising PR for Dev environment.**
 
 - **AP Region:**
-  - AP_Image: [                     ]
+  - Image: 
 
 - **EU Region:**
-  - EU_Image: [                     ]
+  - Image: 
 
 - **US Region:**
-  - US_Image: [                     ]
+  - Image: 
 
 </details>
 
@@ -88,28 +71,29 @@ Please select the environment for this pull request by placing an `x` in the app
 **Note: Do not edit this section if you are raising PR for Dev environment.**
 
 - **AP Region:**
-  - AP_Image: [                     ]
+  - Image: 
 
 - **EU Region:**
-  - EU_Image: [                     ]
+  - Image: 
 
 - **US Region:**
-  - US_Image: [                     ]
+  - Image: 
+
 </details>
 
 ### Staging_Production Environment
 <details>
 <summary>Staging_Production</summary>
 
-**Note: This section is not editable while raising PR for Dev environment.**
+**Note: Do not edit this section if you are raising PR for Dev environment.**
 
 - **AP Region:**
-  - AP_Image: [                     ]
+  - Image: 
 
 - **EU Region:**
-  - EU_Image: [                     ]
+  - Image: 
 
 - **US Region:**
-  - US_Image: [                     ]
+  - Image: 
 
 </details>
