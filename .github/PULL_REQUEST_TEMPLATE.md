@@ -20,13 +20,13 @@ Please select the environment for this pull request by placing an `x` in the app
 <summary>Dev</summary>
 
 - **AP Region:**
-  - Image: dev-ap-image
+  - Image:dev-ap-image
 
 - **EU Region:**
-  - Image: dev-eu-image
+  - Image:dev-eu-image
 
 - **US Region:**
-  - Image: dev-us-image
+  - Image:dev-us-image
 
 </details>
 
