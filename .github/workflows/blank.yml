@@ -18,22 +18,88 @@ jobs:
         PR_BODY=$(jq -r '.pull_request.body' $GITHUB_EVENT_PATH)
         echo "Pull Request Body: $PR_BODY"  # Debugging: Print the PR body
 
+        # Extract the selected environment
         ENVIRONMENT=$(echo "$PR_BODY" | grep -oP '(?<=\[x\] ).*')
         echo "Selected Environment: $ENVIRONMENT"  # Debugging: Print the selected environment
         
+        # Initialize variables
+        AP_IMAGE=""
+        EU_IMAGE=""
+        US_IMAGE=""
+        
+        # Extract image values based on the selected environment
         if [[ "$ENVIRONMENT" == "Dev" ]]; then
           AP_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Dev Environment.*AP Region:.*Image: ).*' | head -n 1)
           EU_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Dev Environment.*EU Region:.*Image: ).*' | head -n 1)
           US_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Dev Environment.*US Region:.*Image: ).*' | head -n 1)
-          echo "AP Image: $AP_IMAGE"  # Debugging: Print the extracted AP image value
-          echo "EU Image: $EU_IMAGE"  # Debugging: Print the extracted EU image value
-          echo "US Image: $US_IMAGE"  # Debugging: Print the extracted US image value
+        elif [[ "$ENVIRONMENT" == "Staging" ]]; then
+          AP_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Staging Environment.*AP Region:.*Image: ).*' | head -n 1)
+          EU_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Staging Environment.*EU Region:.*Image: ).*' | head -n 1)
+          US_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Staging Environment.*US Region:.*Image: ).*' | head -n 1)
+        elif [[ "$ENVIRONMENT" == "Preprod" ]]; then
+          AP_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Preprod Environment.*AP Region:.*Image: ).*' | head -n 1)
+          EU_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Preprod Environment.*EU Region:.*Image: ).*' | head -n 1)
+          US_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Preprod Environment.*US Region:.*Image: ).*' | head -n 1)
+        elif [[ "$ENVIRONMENT" == "Prod" ]]; then
+          AP_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Prod Environment.*AP Region:.*Image: ).*' | head -n 1)
+          EU_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Prod Environment.*EU Region:.*Image: ).*' | head -n 1)
+          US_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Prod Environment.*US Region:.*Image: ).*' | head -n 1)
+        elif [[ "$ENVIRONMENT" == "Staging_Production" ]]; then
+          AP_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Staging_Production Environment.*AP Region:.*Image: ).*' | head -n 1)
+          EU_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Staging_Production Environment.*EU Region:.*Image: ).*' | head -n 1)
+          US_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=Staging_Production Environment.*US Region:.*Image: ).*' | head -n 1)
         fi
+
+        echo "AP Image: $AP_IMAGE"  # Debugging: Print the extracted AP image value
+        echo "EU Image: $EU_IMAGE"  # Debugging: Print the extracted EU image value
+        echo "US Image: $US_IMAGE"  # Debugging: Print the extracted US image value
 
         echo "::set-output name=environment::$ENVIRONMENT"
         echo "::set-output name=ap_image::$AP_IMAGE"
         echo "::set-output name=eu_image::$EU_IMAGE"
         echo "::set-output name=us_image::$US_IMAGE"
-      
-      env:
-        GITHUB_EVENT_PATH: ${{ github.event_path }}
+
+    - name: Deploy to Dev
+      if: steps.extract.outputs.environment == 'Dev'
+      run: |
+        echo "Deploying to Dev environment"
+        echo "AP Region Image: ${{ steps.extract.outputs.ap_image }}"
+        echo "EU Region Image: ${{ steps.extract.outputs.eu_image }}"
+        echo "US Region Image: ${{ steps.extract.outputs.us_image }}"
+        # Add your deployment script/commands here
+
+    - name: Deploy to Staging
+      if: steps.extract.outputs.environment == 'Staging'
+      run: |
+        echo "Deploying to Staging environment"
+        echo "AP Region Image: ${{ steps.extract.outputs.ap_image }}"
+        echo "EU Region Image: ${{ steps.extract.outputs.eu_image }}"
+        echo "US Region Image: ${{ steps.extract.outputs.us_image }}"
+        # Add your deployment script/commands here
+
+    - name: Deploy to Preprod
+      if: steps.extract.outputs.environment == 'Preprod'
+      run: |
+        echo "Deploying to Preprod environment"
+        echo "AP Region Image: ${{ steps.extract.outputs.ap_image }}"
+        echo "EU Region Image: ${{ steps.extract.outputs.eu_image }}"
+        echo "US Region Image: ${{ steps.extract.outputs.us_image }}"
+        # Add your deployment script/commands here
+
+    - name: Deploy to Prod
+      if: steps.extract.outputs.environment == 'Prod'
+      run: |
+        echo "Deploying to Prod environment"
+        echo "AP Region Image: ${{ steps.extract.outputs.ap_image }}"
+        echo "EU Region Image: ${{ steps.extract.outputs.eu_image }}"
+        echo "US Region Image: ${{ steps.extract.outputs.us_image }}"
+        # Add your deployment script/commands here
+
+    - name: Deploy to Staging_Production
+      if: steps.extract.outputs.environment == 'Staging_Production'
+      run: |
+        echo "Deploying to Staging_Production environment"
+        echo "AP Region Image: ${{ steps.extract.outputs.ap_image }}"
+        echo "EU Region Image: ${{ steps.extract.outputs.eu_image }}"
+        echo "US Region Image: ${{ steps.extract.outputs.us_image }}"
+        # Add your deployment script/commands here
