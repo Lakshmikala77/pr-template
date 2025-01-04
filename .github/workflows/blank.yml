@@ -20,8 +20,8 @@ jobs:
         echo "Pull Request Body:"
         echo "$PR_BODY"
 
-        # Extract the selected environment
-        ENVIRONMENT=$(echo "$PR_BODY" | grep -oP '(?<=\[\s*x\s*\]\s).*')
+        # Extract the selected environment (look for '[ x ] <env>')
+        ENVIRONMENT=$(echo "$PR_BODY" | awk '/- \[ x \]/ { print $NF }')
         echo "Selected Environment: $ENVIRONMENT"
 
         # Initialize variables
@@ -29,34 +29,28 @@ jobs:
         EU_IMAGE=""
         US_IMAGE=""
 
-        # Extract image values based on the selected environment
+        # Extract image values for the selected environment
         if [[ "$ENVIRONMENT" == "Dev" ]]; then
-          AP_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- \*\*AP Region:\*\*\s*- Image:).+')
-          EU_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- \*\*EU Region:\*\*\s*- Image:).+')
-          US_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- \*\*US Region:\*\*\s*- Image:).+')
+          AP_IMAGE=$(echo "$PR_BODY" | awk '/\*\*AP Region:\*\*/ {getline; print $NF}')
+          EU_IMAGE=$(echo "$PR_BODY" | awk '/\*\*EU Region:\*\*/ {getline; print $NF}')
+          US_IMAGE=$(echo "$PR_BODY" | awk '/\*\*US Region:\*\*/ {getline; print $NF}')
         else
-          echo "Environment not supported or not selected correctly."
+          echo "Error: Unsupported environment '$ENVIRONMENT'."
           exit 1
         fi
 
         # Debugging: Print extracted values
-        echo "Extracted Images Before Trim: AP='$AP_IMAGE', EU='$EU_IMAGE', US='$US_IMAGE'"
+        echo "Extracted AP Image: $AP_IMAGE"
+        echo "Extracted EU Image: $EU_IMAGE"
+        echo "Extracted US Image: $US_IMAGE"
 
-        # Trim whitespace
-        AP_IMAGE=$(echo "$AP_IMAGE" | xargs)
-        EU_IMAGE=$(echo "$EU_IMAGE" | xargs)
-        US_IMAGE=$(echo "$US_IMAGE" | xargs)
-
-        # Debugging: Print final values
-        echo "Final Images: AP='$AP_IMAGE', EU='$EU_IMAGE', US='$US_IMAGE'"
-
-        # Validate values
-        if [ -z "$ENVIRONMENT" ] || [ -z "$AP_IMAGE" ] || [ -z "$EU_IMAGE" ] || [ -z "$US_IMAGE" ]; then
+        # Validate extracted values
+        if [[ -z "$ENVIRONMENT" || -z "$AP_IMAGE" || -z "$EU_IMAGE" || -z "$US_IMAGE" ]]; then
           echo "Error: One or more required values are missing."
           exit 1
         fi
 
-        # Set output variables
+        # Set environment variables
         echo "environment=$ENVIRONMENT" >> $GITHUB_ENV
         echo "ap_image=$AP_IMAGE" >> $GITHUB_ENV
         echo "eu_image=$EU_IMAGE" >> $GITHUB_ENV
