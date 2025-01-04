@@ -21,7 +21,7 @@ jobs:
         echo "$PR_BODY"
 
         # Extract the selected environment
-        ENVIRONMENT=$(echo "$PR_BODY" | grep -oP '(?<=\[\s*x\s*\]\s).*')
+        ENVIRONMENT=$(echo "$PR_BODY" | awk '/- \[ x \]/ {print $NF}')
         echo "Selected Environment: $ENVIRONMENT"
 
         # Initialize variables
@@ -29,11 +29,11 @@ jobs:
         EU_IMAGE=""
         US_IMAGE=""
 
-        # Extract image values based on the selected environment
+        # Extract image values for the selected environment
         if [[ "$ENVIRONMENT" == "Dev" ]]; then
-          AP_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- \*\*AP Region:\*\*\s*- Image:).+')
-          EU_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- \*\*EU Region:\*\*\s*- Image:).+')
-          US_IMAGE=$(echo "$PR_BODY" | grep -oP '(?<=- \*\*US Region:\*\*\s*- Image:).+')
+          AP_IMAGE=$(echo "$PR_BODY" | awk -F"Image:" '/\*\*AP Region:\*\*/ {print $2}' | xargs)
+          EU_IMAGE=$(echo "$PR_BODY" | awk -F"Image:" '/\*\*EU Region:\*\*/ {print $2}' | xargs)
+          US_IMAGE=$(echo "$PR_BODY" | awk -F"Image:" '/\*\*US Region:\*\*/ {print $2}' | xargs)
         else
           echo "Environment not supported or not selected correctly."
           exit 1
@@ -42,21 +42,13 @@ jobs:
         # Debugging: Print extracted values
         echo "Extracted Images Before Trim: AP='$AP_IMAGE', EU='$EU_IMAGE', US='$US_IMAGE'"
 
-        # Trim whitespace
-        AP_IMAGE=$(echo "$AP_IMAGE" | xargs)
-        EU_IMAGE=$(echo "$EU_IMAGE" | xargs)
-        US_IMAGE=$(echo "$US_IMAGE" | xargs)
-
-        # Debugging: Print final values
-        echo "Final Images: AP='$AP_IMAGE', EU='$EU_IMAGE', US='$US_IMAGE'"
-
-        # Validate values
+        # Validate extracted values
         if [ -z "$ENVIRONMENT" ] || [ -z "$AP_IMAGE" ] || [ -z "$EU_IMAGE" ] || [ -z "$US_IMAGE" ]; then
           echo "Error: One or more required values are missing."
           exit 1
         fi
 
-        # Set output variables
+        # Set environment variables
         echo "environment=$ENVIRONMENT" >> $GITHUB_ENV
         echo "ap_image=$AP_IMAGE" >> $GITHUB_ENV
         echo "eu_image=$EU_IMAGE" >> $GITHUB_ENV
