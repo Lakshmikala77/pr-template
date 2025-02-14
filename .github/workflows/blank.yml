@@ -69,4 +69,4 @@ jobs:
         echo "AP Region Image: ${{ env.ap_image }}"
         echo "EU Region Image: ${{ env.eu_image }}"
         echo "US Region Image: ${{ env.us_image }}"
-        # Add your deployment commands here
+        
